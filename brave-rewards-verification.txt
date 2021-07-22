@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: delta-discordbot.github.io
+Token: 0aeaf6eb5d8c92b8dd1de3091e562de95af6a7095d77e84e24b5d96e88b89ad3
