@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=2">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+<head>
+<style>
+.feather-large{
+width: 60%;
+height: 60%;
+}
+.black {
+  background-color: #000000;
+}
+
+.dark {
+  background-color: #363636;
+}
+
+</style>
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="https://i.imgur.com/heGD898.png">
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href='/'>
+        Home
+      </a>
+
+      <a class="navbar-item" href='/invite'>
+        Invite
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href='/'>
+            About
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-danger">
+            <strong>Log In</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+</head>
+<body class='dark'>
+<progress class="progress is-danger" max="100"></progress>
+<div class="tile is-ancestor">-
+  <div class="tile is-parent">
+    <article class="tile is-child box black has-text-white">
+      <p class="title" style='color:white;'>Let's get</p>
+      <img src='https://i.imgur.com/0hZ5lnE.png'>
+      <p class="subtitle" style='color:white;'>Descriptions</p>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box black has-text-white">
+      <p class="title" style='color:white;'>Some music</p>
+      <img src='https://i.imgur.com/3AMkvJx.png'>
+      <p class="subtitle" style='color:white;'>Will go</p>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box black has-text-white">
+      <p class="title" style='color:white;'>Playing!</p>
+      <img src='https://i.imgur.com/0hZ5lnE.png'>
+      <p class="subtitle" style='color:white;'>Here</p>
+    </article>
+  </div>
+</div>
+</body>
+<script>
+feather.replace();
+if(window.location.href.indexOf('?code=') != -1) {
+  let code = window.location.search.replace('?code=','');
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}`);
+  xhttp.send();
+  console.log(xhttp.responseText);
+}
+else {
+  window.location.replace('/login');
+}
+</script>
+</html> 
