@@ -48,11 +48,9 @@ height: 60%;
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-danger">
-            <strong>Log In</strong>
-          </a>
-        </div>
+        <span style='display: flex; align-items: center;' class='has-text-white'>
+          <img src='https://i.imgur.com/FDCxzML.png' id='UserImg'><p id='Username'>Loading...</p></img>
+        <span>
       </div>
     </div>
   </div>
@@ -63,23 +61,23 @@ height: 60%;
 <div class="tile is-ancestor">-
   <div class="tile is-parent">
     <article class="tile is-child box black has-text-white">
-      <p class="title" style='color:white;'>Let's get</p>
+      <p class="title" style='color:white;'>Song 2</p>
       <img src='https://i.imgur.com/0hZ5lnE.png'>
-      <p class="subtitle" style='color:white;'>Descriptions</p>
+      <p class="subtitle" style='color:white;'></p>
     </article>
   </div>
   <div class="tile is-parent">
     <article class="tile is-child box black has-text-white">
-      <p class="title" style='color:white;'>Some music</p>
+      <p class="title" style='color:white;'>Song 1</p>
       <img src='https://i.imgur.com/3AMkvJx.png'>
-      <p class="subtitle" style='color:white;'>Will go</p>
+      <p class="subtitle" style='color:white;'></p>
     </article>
   </div>
   <div class="tile is-parent">
     <article class="tile is-child box black has-text-white">
-      <p class="title" style='color:white;'>Playing!</p>
+      <p class="title" style='color:white;'>Song 3</p>
       <img src='https://i.imgur.com/0hZ5lnE.png'>
-      <p class="subtitle" style='color:white;'>Here</p>
+      <p class="subtitle" style='color:white;'></p>
     </article>
   </div>
 </div>
@@ -111,15 +109,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
-if(window.location.href.indexOf('?code=') != -1) {
+if(window.location.href.indexOf('?code=') == -1) {
   let code = window.location.search.replace('?code=','');
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}/`);
+  xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}`);
   xhttp.send();
   console.log(xhttp.responseText);
+  const json = JSON.parse(xhttp.responseText);
+  document.getElementById('Username').innerHTML = json.username;
+  document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
 }
 else {
-  window.location.replace('/login');
+  //window.location.replace('/login');
 }
+
 </script>
 </html> 
