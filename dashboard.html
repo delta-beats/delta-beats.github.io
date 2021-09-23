@@ -116,7 +116,7 @@ if(window.location.href.indexOf('?code=') != -1) {
   xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}/`);
   xhttp.send();
   console.log(xhttp.response);
-  const json = JSON.parse(xhttp.response);
+  const json = xhttp.response
   document.getElementById('Username').innerHTML = json.username;
   document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
 }
