@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 if(window.location.href.indexOf('?code=') != -1) {
   let code = window.location.search.replace('?code=','');
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}`);
+  xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}/`);
   xhttp.send();
   console.log(xhttp.responseText);
   const json = JSON.parse(xhttp.responseText);
