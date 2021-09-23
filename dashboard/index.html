@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
-if(window.location.href.indexOf('?code=') == -1) {
+if(window.location.href.indexOf('?code=') != -1) {
   let code = window.location.search.replace('?code=','');
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}`);
@@ -120,7 +120,7 @@ if(window.location.href.indexOf('?code=') == -1) {
   document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
 }
 else {
-  //window.location.replace('/login');
+  window.location.replace('/login');
 }
 
 </script>
