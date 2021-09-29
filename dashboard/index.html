@@ -1,3 +1,148 @@
+<!DOCTYPE html>
+<html class='dark'>
+<title>Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+<head>
+<style>
+.feather-large{
+width: 60%;
+height: 60%;
+}
+.black {
+  background-color: #000000;
+}
+
+.dark {
+  background-color: #363636;
+}
+.menu {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+</style>
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="https://i.imgur.com/heGD898.png">
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu dark">
+    <div class="navbar-start">
+      <a class="navbar-item has-text-white	" href='/'>
+        Home
+      </a>
+
+      <a class="navbar-item has-text-white	" href='/invite'>
+        Invite
+      </a>
+
+      <a class="navbar-item has-text-white	" href='/'>
+        About
+      </a>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <span style='display: flex; align-items: center;' class='has-text-white'>
+          <img src='https://i.imgur.com/FDCxzML.png' id='UserImg'><p id='Username'>Loading...</p></img>
+        <span>
+      </div>
+    </div>
+  </div>
+</nav>
+</head>
+<body>
+<progress class="progress is-danger" max="100"></progress>
+<div class="tile is-ancestor">-
+  <div class="tile is-parent">
+    <article class="tile is-child box black has-text-white">
+      <p class="title" style='color:white;'>Song 2</p>
+      <img src='https://i.imgur.com/0hZ5lnE.png'>
+      <p class="subtitle" style='color:white;'></p>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box black has-text-white">
+      <p class="title" style='color:white;'>Song 1</p>
+      <img src='https://i.imgur.com/3AMkvJx.png'>
+      <p class="subtitle" style='color:white;'></p>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box black has-text-white">
+      <p class="title" style='color:white;'>Song 3</p>
+      <img src='https://i.imgur.com/0hZ5lnE.png'>
+      <p class="subtitle" style='color:white;'></p>
+    </article>
+  </div>
+</div>
+<div class="box has-background-black has-text-white">
+  <div class="field">
+    <label class="label">Song name</label>
+    <div class="control has-icons-right">
+      <input class="input is-rounded is-danger" type="email" placeholder="e.g. Penny Lane">
+      <span class="icon is-small is-right">
+          <i data-feather="search" color='black'></i>
+      </span>
+    </div>
+    <br>
+    <button class="button is-danger">Search</button>
+  </div>
+</div>
+<div style='position:relative;'>
+  <div class="columns is-mobile is-centered menu has-background-black pt-3">
+      <a onclick = 'skip_back()'>
+        <img data-feather="skip-back" color='white'></img>
+      </a>
+      <a onclick = 'skip_back()'>
+        <img data-feather="play" color='white' style='width:40px;'></img>
+      </a>
+      <a onclick = 'skip_back()'>
+        <img data-feather="skip-forward" color='white'></img>
+      </a>
+      <br>
+      <br>
+  </div>
+</div>
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  feather.replace();
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+
 if(window.location.href.indexOf('?code=') != -1) {
   let code = window.location.search.replace('?code=','');
   var xhttp = new XMLHttpRequest();
@@ -22,3 +167,6 @@ function on_response () {
   document.getElementById('Username').innerHTML = this.xhttp.response.username;
   document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${this.xhttp.response.id}/${this.xhttp.response.avatar}?size=28`
 }
+
+</script>
+</html> 
