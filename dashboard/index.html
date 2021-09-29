@@ -162,12 +162,12 @@ else {
   //window.location.replace('/login');
 }
 function on_response () {
-  console.log(this);
-  if(this.status != 200) {
+  console.log(this.xhttp);
+  if(this.xhttp.status != 200) {
     window.location.replace('/login');
   }
-  console.log(this.response);
-  const json = this.response;
+  console.log(this.xhttp.response);
+  const json = this.xhttp.response;
   document.getElementById('Username').innerHTML = json.username;
   document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
 }
