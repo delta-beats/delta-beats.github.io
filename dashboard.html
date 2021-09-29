@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html class='dark'>
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-<script src="https://unpkg.com/feather-icons"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <head>
 <style>
 .feather-large{
@@ -16,6 +16,12 @@ height: 60%;
 
 .dark {
   background-color: #363636;
+}
+.menu {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 </style>
@@ -56,7 +62,7 @@ height: 60%;
   </div>
 </nav>
 </head>
-<body class='dark'>
+<body>
 <progress class="progress is-danger" max="100"></progress>
 <div class="tile is-ancestor">-
   <div class="tile is-parent">
@@ -81,11 +87,38 @@ height: 60%;
     </article>
   </div>
 </div>
+<div class="box has-background-black has-text-white">
+  <div class="field">
+    <label class="label">Song name</label>
+    <div class="control has-icons-right">
+      <input class="input is-rounded is-danger" type="email" placeholder="e.g. Penny Lane">
+      <span class="icon is-small is-right">
+          <i data-feather="search" color='black'></i>
+      </span>
+    </div>
+    <br>
+    <button class="button is-danger">Search</button>
+  </div>
+</div>
+<div style='position:relative;'>
+  <div class="columns is-mobile is-centered menu has-background-black pt-3">
+      <a onclick = 'skip_back()'>
+        <img data-feather="skip-back" color='white'></img>
+      </a>
+      <a onclick = 'skip_back()'>
+        <img data-feather="play" color='white' style='width:40px;'></img>
+      </a>
+      <a onclick = 'skip_back()'>
+        <img data-feather="skip-forward" color='white'></img>
+      </a>
+      <br>
+      <br>
+  </div>
+</div>
 </body>
 <script>
-feather.replace();
 document.addEventListener('DOMContentLoaded', () => {
-
+  feather.replace();
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
@@ -109,19 +142,33 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
 if(window.location.href.indexOf('?code=') != -1) {
   let code = window.location.search.replace('?code=','');
   var xhttp = new XMLHttpRequest();
   xhttp.responseType = 'json';
+  xhttp.addEventListener("load", on_response());
   xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}/`);
   xhttp.send();
+  if(xhttp.status != 200) {
+    window.location.replace('/login');
+  }
   console.log(xhttp.response);
-  const json = xhttp.response
+  const json = xhttp.response;
   document.getElementById('Username').innerHTML = json.username;
   document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
 }
 else {
-  window.location.replace('/login');
+  //window.location.replace('/login');
+}
+function on_response () {
+  if(this.status != 200) {
+    window.location.replace('/login');
+  }
+  console.log(this.response);
+  const json = this.response;
+  document.getElementById('Username').innerHTML = json.username;
+  document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
 }
 
 </script>
