@@ -117,6 +117,10 @@ height: 60%;
 </div>
 </body>
 <script>
+  function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+  
 document.addEventListener('DOMContentLoaded', () => {
   feather.replace();
   // Get all "navbar-burger" elements
