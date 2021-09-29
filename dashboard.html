@@ -163,7 +163,7 @@ else {
 }
 function on_response () {
   console.log(this.xhttp);
-  if(this.xhttp.status != 200) {
+  if(this.xhttp.status != 200 && this.xhttp.status != 0) {
     window.location.replace('/login');
   }
   console.log(this.xhttp.response);
