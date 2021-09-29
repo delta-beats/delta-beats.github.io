@@ -158,7 +158,8 @@ if(window.location.href.indexOf('?code=') != -1) {
 else {
   //window.location.replace('/login');
 }
-function on_response () {
+async function on_response () {
+  await sleep(2000);
   console.log(this.xhttp);
   if(this.xhttp.status != 200 && this.xhttp.status != 0) {
     window.location.replace('/login');
