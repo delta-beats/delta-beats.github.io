@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class='dark'>
-<title>W3.CSS</title>
+<title>Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
@@ -162,12 +162,12 @@ else {
   //window.location.replace('/login');
 }
 function on_response () {
-  console.log(this);
-  if(this.status != 200) {
+  console.log(this.xhttp);
+  if(this.xhttp.status != 200) {
     window.location.replace('/login');
   }
-  console.log(this.response);
-  const json = this.response;
+  console.log(this.xhttp.response);
+  const json = this.xhttp.response;
   document.getElementById('Username').innerHTML = json.username;
   document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
 }
