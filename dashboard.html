@@ -159,7 +159,7 @@
 
     async function play_pause() {
         let code = window.location.search.replace('?code=', '');
-        let playpauserequest = await fetch(`https://httpsforwarder.ddb08.repl.co/api/toggleplaypause/${json.id}/${code}/`);
+        let playpauserequest = await fetch(`https://httpsforwarder.ddb08.repl.co/api/toggleplaypause/${document.user_info.id}/${code}/`);
     }
 
     if (window.location.href.indexOf('?code=') != -1) {
