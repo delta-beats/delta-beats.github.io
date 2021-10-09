@@ -172,7 +172,7 @@
         xhttp.send();
         xhttp.addEventListener("load", on_response());
         console.log(xhttp.response);
-        const json = xhttp.response;
+        var json = xhttp.response;
         document.getElementById('Username').innerHTML = json.username;
         document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
     }
