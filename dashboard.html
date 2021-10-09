@@ -114,7 +114,7 @@
             <a onclick='skip_back()'>
                 <img data-feather="skip-back" color='white' alt='skip back icon'></img>
             </a>
-            <a onclick='play_pause()'>
+            <a onclick='await play_pause()'>
                 <img data-feather="play" color='white' style='width:40px;' alt='play icon'></img>
             </a>
             <a onclick='skip_forward()'>
@@ -152,11 +152,9 @@
                     // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                     el.classList.toggle('is-active');
                     $target.classList.toggle('is-active');
-
                 });
             });
         }
-
     });
 
     async function play_pause() {
@@ -177,7 +175,17 @@
         document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}?size=28`
     }
     else {
-        window.location.replace('/login');
+        //window.location.replace('/login');
+    }
+    async function on_response () {
+        await sleep(2000);
+        console.log(this.xhttp);
+        if(this.xhttp.status != 200 && this.xhttp.status != 0) {
+            window.location.replace('/login');
+        }
+        console.log(this.xhttp.response);
+        document.getElementById('Username').innerHTML = this.xhttp.response.username;
+        document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${this.xhttp.response.id}/${this.xhttp.response.avatar}?size=28`
     }
 
 </script>
