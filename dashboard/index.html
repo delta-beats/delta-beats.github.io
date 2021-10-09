@@ -185,6 +185,7 @@
             window.location.replace('/login');
         }
         console.log(this.xhttp.response);
+        document.user_info = xhttp.response
         document.getElementById('Username').innerHTML = this.xhttp.response.username;
         document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${this.xhttp.response.id}/${this.xhttp.response.avatar}?size=28`
     }
