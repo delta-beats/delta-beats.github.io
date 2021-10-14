@@ -171,8 +171,7 @@
         window.location.replace('/login');
     }
     async function play_pause() {
-        let code = window.location.search.replace('?code=', '');
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/${code}/`).then(
+        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/`).then(
             function (response) {
                 if ('not_connected' in response.text) {
                     bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger'})
@@ -181,8 +180,7 @@
         )
     }
     async function skip_forward() {
-        let code = window.location.search.replace('?code=', '');
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/skip_forward/${document.user_info.id}/${code}/`).then(
+        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/skip_forward/${document.user_info.id}/`).then(
             function (response) {
                 if ('not_connected' in response.text) {
                     bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger'})
