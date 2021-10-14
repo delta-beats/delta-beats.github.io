@@ -173,7 +173,7 @@
     async function play_pause() {
         await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/`).then(
             function (response) {
-                if ('not_connected' in response.text) {
+                if (response.status == 406) {
                     bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger'})
                 }
             }
@@ -182,7 +182,7 @@
     async function skip_forward() {
         await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/skip_forward/${document.user_info.id}/`).then(
             function (response) {
-                if ('not_connected' in response.text) {
+                if (response.status == 406) {
                     bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger'})
                 }
             }
