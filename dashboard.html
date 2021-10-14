@@ -4,7 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
-
+<script src="https://unpkg.com/bulma-toast"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
 <head>
     <style>
         .feather-large {
@@ -157,11 +158,6 @@
         }
     });
 
-    async function play_pause() {
-        let code = window.location.search.replace('?code=', '');
-        let playpauserequest = await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/`);
-    }
-
     if (window.location.href.indexOf('?code=') != -1) {
         let code = window.location.search.replace('?code=', '');
         var xhttp = new XMLHttpRequest();
@@ -170,15 +166,34 @@
         xhttp.send();
         xhttp.addEventListener("load", on_response());
         console.log(xhttp.response);
-        var json = xhttp.response;
     }
     else {
         window.location.replace('/login');
     }
-    async function on_response () {
+    async function play_pause() {
+        let code = window.location.search.replace('?code=', '');
+        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/${code}/`).then(
+            function (response) {
+                if ('not_connected' in response.text) {
+                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger'})
+                }
+            }
+        )
+    }
+    async function skip_forward() {
+        let code = window.location.search.replace('?code=', '');
+        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/skip_forward/${document.user_info.id}/${code}/`).then(
+            function (response) {
+                if ('not_connected' in response.text) {
+                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger'})
+                }
+            }
+        )
+    }
+    async function on_response() {
         await sleep(2000);
         console.log(this.xhttp);
-        if(this.xhttp.status != 200 && this.xhttp.status != 0) {
+        if (this.xhttp.status != 200 && this.xhttp.status != 0) {
             window.location.replace('/login');
         }
         console.log(this.xhttp.response);
@@ -188,5 +203,4 @@
     }
 
 </script>
-
 </html>
