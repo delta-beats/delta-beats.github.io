@@ -76,13 +76,16 @@
         <div class="tile is-parent">
             <article class="tile is-child box black has-text-white">
                 <p class="title" style='color:white;'>Now Playing</p>
-                <img src='https://i.imgur.com/0hZ5lnE.png' alt='Placeholder image for playing track' id="artwork">
+                <p class="subtitle has-text-white" id="songname">Song Name</p>
+                <img src='https://i.imgur.com/0hZ5lnE.png' alt='Placeholder image for playing track' id='artwork' style="height: 50px;width: 50px;">
                 <p class="subtitle" style='color:white;'></p>
             </article>
         </div>
         <div class="tile is-parent">
             <article class="tile is-child box black has-text-white">
                 <p class="title" style='color:white;'>Queue</p>
+                <ul id="queue-items">
+                </ul>
             </article>
         </div>
     </div>
@@ -108,7 +111,7 @@
                 <img data-feather="skip-back" color='white' alt='skip back icon'></img>
             </a>
             <a onclick='play_pause()'>
-                <img data-feather="play" color='white' style='width:40px;' alt='play icon'></img>
+                <img data-feather="play" color='white' style='width:40px;' alt='play icon' id='playpause'></img>
             </a>
             <a onclick='skip_forward()'>
                 <img data-feather="skip-forward" color='white' alt='skip forward icon'></img>
@@ -166,7 +169,7 @@
     async function UpdateContent() {
         await sleep(2000);
         while (true) {
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            await sleep(5000)
             await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/update/${document.user_info.id}/`).then((response) => {
                 return response.json()
             }).then(
@@ -175,8 +178,20 @@
                         return bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' });
                     }
                     document.getElementById("artwork").src = response.artwork;
+                    document.getElementById("songname").innerHTML = response.current_title
+                    response.queue.forEach(function (item, index) {
+                        document.getElementById("queue-items").innerHTML += ```
+                        <div class="card dark">
+                  <header class="card-header">
+                    <p class="card-header-title has-text-white">
+                      ${index+1}. ${item.title}
+                    </p>
+                  </header>
+                </div>
+                        ```
                 }
             )
+            UpdateContent();
         }
     }
 
@@ -186,7 +201,15 @@
         await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/`).then(
             function (response) {
                 if ('not_connected' in response.text) {
-                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' })
+                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' });
+                }
+                if ('was_paused' in response.text) {
+                    playpause = document.getElementById("playpause");
+                    element.setAttribute('data-feather', 'play');
+                }
+                else if ('was_not_playing' in response.text) {
+                    playpause = document.getElementById("playpause");
+                    element.setAttribute('data-feather', 'pause');
                 }
             }
         )
