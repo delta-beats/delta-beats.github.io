@@ -178,18 +178,19 @@
                         return bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' });
                     }
                     document.getElementById("artwork").src = response.artwork;
-                    document.getElementById("songname").innerHTML = response.current_title
+                    document.getElementById("songname").innerHTML = response.current_title;
                     response.queue.forEach(function (item, index) {
                         document.getElementById("queue-items").innerHTML += ```
                         <div class="card dark">
-                  <header class="card-header">
-                    <p class="card-header-title has-text-white">
-                      ${index+1}. ${item.title}
-                    </p>
-                  </header>
-                </div>
+                            <header class="card-header">
+                                <p class="card-header-title has-text-white">
+                                ${index+1}. ${item.title}
+                                </p>
+                            </header>
+                        </div>
                         ```
-                }
+                    }
+                    );}
             )
             UpdateContent();
         }
