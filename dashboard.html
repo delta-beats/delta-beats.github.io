@@ -72,7 +72,7 @@
 
 <body>
     <progress class="progress is-danger" max="100"></progress>
-    <div class="tile is-ancestor">-
+    <div class="tile is-ancestor">
         <div class="tile is-parent">
             <article class="tile is-child box black has-text-white">
                 <p class="title" style='color:white;'>Now Playing</p>
@@ -84,6 +84,7 @@
             <article class="tile is-child box black has-text-white">
                 <p class="title" style='color:white;'>Queue</p>
             </article>
+        </div>
     </div>
     <div class="box has-background-black has-text-white">
         <div class="field">
@@ -149,22 +150,6 @@
         }
     });
 
-    function UpdateContent(){
-        // Updates the content every 5 seconds.
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/update/${document.user_info.id}/`).then((response) => {
-            return response.json()
-        }).then(
-            function (response) {
-                if ('not_connected' in response.text) {
-                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' });
-                    document.getElementById("artwork").src = response.artwork;
-                }
-            }
-        )
-        setTimeout(UpdateContent, 5000);
-    }
-
-    UpdateContent();
     if (window.location.href.indexOf('?code=') != -1) {
         let code = window.location.search.replace('?code=', '');
         var xhttp = new XMLHttpRequest();
@@ -177,6 +162,25 @@
     else {
         window.location.replace('/login');
     }
+
+    async function UpdateContent() {
+        while (true) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/update/${document.user_info.id}/`).then((response) => {
+                return response.json()
+            }).then(
+                function (response) {
+                    if ('not_connected' in response.text) {
+                        bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' });
+                    }
+                    document.getElementById("artwork").src = response.artwork;
+                }
+            )
+        }
+    }
+
+    UpdateContent();
+
     async function play_pause() {
         await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/`).then(
             function (response) {
