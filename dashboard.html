@@ -164,6 +164,7 @@
     }
 
     async function UpdateContent() {
+        await sleep(2000);
         while (true) {
             await new Promise(resolve => setTimeout(resolve, 500));
             await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/update/${document.user_info.id}/`).then((response) => {
