@@ -207,10 +207,10 @@
         var search = document.getElementsByID("search_bar")[0].value;
         document.getElementsByID("search_bar")[0].value = '';
         await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/addsong/${query}/`).then((response) => {
-            return response.json()
+            return response.json();
         }).then(
             function (response) {
-                if response.success == false {
+                if (response.success == false) {
                     return bulmaToast.toast({ message: 'Sorry, no results found.', type: 'is-danger' });
                 }
                 else {
