@@ -217,6 +217,9 @@
                     return bulmaToast.toast({ message: `Added ${response.type} to queue.`, type: 'is-success' });
                 }
             }
+        ).catch(function (error) {
+            bulmaToast.toast({ message: `Sorry, an error occurred: ${error}.`, type: 'is-danger' });
+        }
     }
 
     async function play_pause() {
