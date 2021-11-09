@@ -77,7 +77,7 @@
             <article class="tile is-child box black has-text-white">
                 <p class="title" style='color:white;'>Now Playing</p>
                 <p class="subtitle has-text-white" id="songname">Song Name</p>
-                <img src='https://i.imgur.com/0hZ5lnE.png' alt='Placeholder image for playing track' id='artwork' style="height: 50px;width: 50px;">
+                <img src='https://i.imgur.com/0hZ5lnE.png' alt='Placeholder image for playing track' id='artwork' style="height: 500px;width: 500px;">
                 <p class="subtitle" style='color:white;'></p>
             </article>
         </div>
@@ -93,13 +93,13 @@
         <div class="field">
             <label class="label">Song name</label>
             <div class="control has-icons-right">
-                <input class="input is-rounded is-danger" type="email" placeholder="e.g. Penny Lane">
+                <input class="input is-rounded is-danger" type="search" placeholder="e.g. Penny Lane" id="search_bar">
                 <span class="icon is-small is-right">
                     <i data-feather="search" color='black'></i>
                 </span>
             </div>
             <br>
-            <button class="button is-danger">Search</button>
+            <button class="button is-danger" onclick="submitsearch()">Search</button>
         </div>
     </div>
     <div style='position:relative;'>
@@ -179,6 +179,7 @@
                     }
                     document.getElementById("artwork").src = response.artwork;
                     document.getElementById("songname").innerHTML = response.current_title;
+                    document.getElementById("queue-items").innerHTML = '';
                     response.queue.forEach(function (item, index) {
                         document.getElementById("queue-items").innerHTML += ```
                         <div class="card dark">
@@ -193,6 +194,7 @@
                     );}
             ).catch(function (error) {
                 console.log(error);
+                sleep(5000);
                 UpdateContent();
             });
             UpdateContent();
@@ -200,6 +202,22 @@
     }
 
     UpdateContent();
+
+    async function submitsearch() {
+        var search = document.getElementsByID("search_bar")[0].value;
+        document.getElementsByID("search_bar")[0].value = '';
+        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/addsong/${query}/`).then((response) => {
+            return response.json()
+        }).then(
+            function (response) {
+                if response.success == false {
+                    return bulmaToast.toast({ message: 'Sorry, no results found.', type: 'is-danger' });
+                }
+                else {
+                    return bulmaToast.toast({ message: `Added ${response.type} to queue.`, type: 'is-success' });
+                }
+            }
+    }
 
     async function play_pause() {
         await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/`).then(
