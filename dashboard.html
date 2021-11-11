@@ -194,13 +194,13 @@
                     );}
             ).catch(async function (error) {
                 console.log(error);
-                setTimeout(repeatingFunc, 5000);
+                setTimeout(UpdateContent, 5000);
             });
-            setTimeout(repeatingFunc, 5000);
+            setTimeout(UpdateContent, 5000);
         }
     }
 
-    UpdateContent();
+    setTimeout(UpdateContent, 5000);
 
     async function submitsearch() {
         var search = document.getElementsByID("search_bar")[0].value;
