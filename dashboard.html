@@ -1,296 +1,228 @@
 <!DOCTYPE html>
-<html class='dark' lang='en'>
-<title>Dashboard</title>
+<html>
+<title>Delta - Free Forever.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
-<script src="https://unpkg.com/bulma-toast"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
-
+<script src="https://unpkg.com/feather-icons"></script>
 <head>
-    <style>
-        .feather-large {
-            width: 60%;
-            height: 60%;
-        }
+<style>
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+.feather-large{
+width: 60%;
+height: 60%;
+}
+.dark {
+  background-color: #363636;
+}
+</style>
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="https://i.imgur.com/heGD898.png">
+    </a>
 
-        .black {
-            background-color: #000000;
-        }
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
 
-        .dark {
-            background-color: #363636;
-        }
+  <div id="navbarBasicExample" class="navbar-menu dark">
+    <div class="navbar-start">
+      <a class="navbar-item" style='color:white;' href='/'>
+        Home
+      </a>
 
-        .menu {
-            overflow: hidden;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="https://i.imgur.com/heGD898.png" alt='logo'>
-            </a>
+      <a class="navbar-item" style='color:white;' href='/invite'>
+        Invite
+      </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
+      <a class="navbar-item" style='color:white;' href='/'>
+         About
+      </a>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-danger" href="/login">
+            <strong>Log In</strong>
+          </a>
         </div>
-
-        <div id="navbarBasicExample" class="navbar-menu dark">
-            <div class="navbar-start">
-                <a class="navbar-item has-text-white" href='/'>
-                    Home
-                </a>
-
-                <a class="navbar-item has-text-white" href='/invite'>
-                    Invite
-                </a>
-
-                <a class="navbar-item has-text-white" href='/'>
-                    About
-                </a>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <span style='display: flex; align-items: center;' class='has-text-white'>
-                            <img src='https://i.imgur.com/FDCxzML.png' id='UserImg' style='border-radius:50%;'
-                                alt='User Avatar'>
-                            <p id='Username'>Loading...</p></img>
-                            <span>
-                    </div>
-                </div>
-            </div>
-    </nav>
-</head>
-
+      </div>
+    </div>
+  </div>
+</nav>
+<head>
 <body>
-    <progress class="progress is-danger" max="100"></progress>
-    <div class="tile is-ancestor">
-        <div class="tile is-parent">
-            <article class="tile is-child box black has-text-white">
-                <p class="title" style='color:white;'>Now Playing</p>
-                <p class="subtitle has-text-white" id="songname">Song Name</p>
-                <img src='https://i.imgur.com/0hZ5lnE.png' alt='Placeholder image for playing track' id='artwork' style="height: 500px;width: 500px;">
-                <p class="subtitle" style='color:white;'></p>
-            </article>
-        </div>
-        <div class="tile is-parent">
-            <article class="tile is-child box black has-text-white">
-                <p class="title" style='color:white;'>Queue</p>
-                <ul id="queue-items">
-                </ul>
-            </article>
-        </div>
+<section class="hero is-danger">
+  <div class="hero-body columns">
+    <div class='column is-one-third'>
+      <img src='https://i.imgur.com/DG3VJOU.png'></img>
     </div>
-    <div class="box has-background-black has-text-white">
-        <div class="field">
-            <label class="label">Song name</label>
-            <div class="control has-icons-right">
-                <input class="input is-rounded is-danger" type="search" placeholder="e.g. Penny Lane" id="search_bar">
-                <span class="icon is-small is-right">
-                    <i data-feather="search" color='black'></i>
-                </span>
-            </div>
-            <br>
-            <button class="button is-danger" onclick="submitsearch()">Search</button>
-        </div>
+    <div class='column'>
+      <p class="title">
+        Meet Delta.
+      </p>
+      <br>
+      <p class="subtitle">
+        An open-source music bot designed for you, not for money.
+      </p>
     </div>
-    <div style='position:relative;'>
-        <div class="columns is-mobile is-centered menu has-background-black pt-3">
-            <a onclick='stop()'>
-                <img data-feather="stop-circle" color='white' alt='skip forward icon' style='width:40px;'></img>
-            </a>
-            <a onclick='skip_back()'>
-                <img data-feather="skip-back" color='white' alt='skip back icon'></img>
-            </a>
-            <a onclick='play_pause()'>
-                <img data-feather="play" color='white' style='width:40px;' alt='play icon' id='playpause'></img>
-            </a>
-            <a onclick='skip_forward()'>
-                <img data-feather="skip-forward" color='white' alt='skip forward icon'></img>
-            </a>
-            <a onclick='shuffle()'>
-                <img data-feather="shuffle" color='white' alt='skip forward icon' style='width:40px;'></img>
-            </a>
-            <br>
-            <br>
-        </div>
+  </div>
+</section>
+<section class="hero is-dark">
+  <div class="hero-body columns">
+    <div class='column'>
+    <p class="title">
+      Secure.
+    </p>
+    <br>
+    <p class="subtitle">
+      Delta is open source, meaning that you can view the code and see how we're using your data, and if you like, make your own version of the bot.<a href='https://github.com/py815-dev/Delta'>
+      <br>
+      <br>
+    <button class="button is-danger">Code Here</button>
+    </a>
+    </p>
     </div>
+    <div class='column is-one-third'>
+     <i data-feather="lock" class='is-right feather-large'></i>
+    </div>
+  </div>
+</section>
+<section class="hero is-dark">
+  <div class="hero-body columns">
+    <div class='column is-one-third'>
+     <i data-feather="more-horizontal" class='is-right feather-large'></i>
+    </div>
+    <div class='column is-right'>
+    <p class="title">
+      Easy to use.
+    </p>
+    <br>
+    <p class="subtitle">
+      Delta provides a dashboard to control your music with ease, no more remembering complicated syntax for commands.
+    </p>
+    <a href='/login'>
+    <button class="button is-danger">Dashboard</button>
+    </a>
+    </div>
+    </div>
+</section>
+<section class="hero is-dark">
+  <div class="hero-body columns">
+    <div class='column'>
+    <p class="title">
+      Upgradeable.
+    </p>
+    <br>
+    <p class="subtitle">
+      Using our simple guide, learn how you can host part of the bot to help contribute to everyone's experience..<a href='/contribute'>
+      <br>
+      <br>
+    <button class="button is-danger">Guide</button>
+    </a>
+    </p>
+    </div>
+    <div class='column is-one-third'>
+     <i data-feather="package" class='is-right feather-large'></i>
+    </div>
+  </div>
+</section>
+<section class="hero is-dark">
+  <div class="hero-body columns">
+    <div class='column is-one-third'>
+     <i data-feather="dollar-sign" class='is-right feather-large'></i>
+    </div>
+    <div class='column is-right'>
+    <p class="title">
+      Free forever.
+    </p>
+    <br>
+    <p class="subtitle">
+      We never plan to introduce a premium tier to Delta, so you can listen unrestricted.
+    </p>
+    <a href='/login'>
+    <button class="button is-danger">Dashboard</button>
+    </a>
+    </div>
+    </div>
+</section>
 </body>
+<footer class="hero is-danger footer">
+    <div class='columns'>
+      <div class='column is-one-quarter'>
+        <p class='subtitle'>Support Delta</p>
+        <a href='https://github.com/py815-dev/Delta'>
+          <span style='display: flex; align-items: center;'>
+          <i data-feather="github"></i>
+          <p>&nbsp;Repository</p>
+          </span>
+        </a>
+        <br>
+        <a href='https://github.com/py815-dev/Delta'>
+          <span style='display: flex; align-items: center;'>
+          <i data-feather="server"></i>
+          <p>&nbsp;Host part of Delta</p>
+          </span>
+        </a>
+      </div>
+      <div class='column is-one-quarter'>
+        <p class='subtitle'>Community</p>
+        <a href='https://discord.gg/TVaRx9sJnP'>
+          <span style='display: flex; align-items: center;'>
+          <i data-feather="message-square"></i>
+          <p>&nbsp;Support server</p>
+          </span>
+        </a>
+      </div>
+      <div class='column is-one-quarter'>
+        <p class='subtitle'>Dashboard</p>
+        <a href='/login'>
+          <span style='display: flex; align-items: center;'>
+          <i data-feather="log-in"></i>
+          <p>&nbsp;Login</p>
+          </span>
+        </a>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    Delta is developed with ❤️ by ddb08#6947.
+</footer>
 <script>
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+feather.replace()
+document.addEventListener('DOMContentLoaded', () => {
 
-    document.addEventListener('DOMContentLoaded', () => {
-        feather.replace();
-        // Get all "navbar-burger" elements
-        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-        // Check if there are any navbar burgers
-        if ($navbarBurgers.length > 0) {
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
 
-            // Add a click event on each of them
-            $navbarBurgers.forEach(el => {
-                el.addEventListener('click', () => {
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
 
-                    // Get the target from the "data-target" attribute
-                    const target = el.dataset.target;
-                    const $target = document.getElementById(target);
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
 
-                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                    el.classList.toggle('is-active');
-                    $target.classList.toggle('is-active');
-                });
-            });
-        }
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
     });
+  }
 
-    if (window.location.href.indexOf('?code=') != -1) {
-        let code = window.location.search.replace('?code=', '');
-        var xhttp = new XMLHttpRequest();
-        xhttp.responseType = 'json';
-        xhttp.open("GET", `https://httpsforwarder.ddb08.repl.co/p/api/userinfo/${code}/`);
-        xhttp.send();
-        xhttp.addEventListener("load", on_response());
-        console.log(xhttp.response);
-    }
-    else {
-        window.location.replace('/login');
-    }
-
-    async function UpdateContent() {
-        await sleep(2000);
-        while (true) {
-            await sleep(5000)
-            await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/update/${document.user_info.id}/`).then((response) => {
-                return response.json();
-            }).then(
-                function (response) {
-                    if (response.connected == false) {
-                        return bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' });
-                    }
-                    document.getElementById("artwork").src = response.artwork;
-                    document.getElementById("songname").innerHTML = response.current_title;
-                    document.getElementById("queue-items").innerHTML = '';
-                    response.queue.forEach(function (item, index) {
-                        document.getElementById("queue-items").innerHTML += ```
-                        <div class="card dark">
-                            <header class="card-header">
-                                <p class="card-header-title has-text-white">
-                                ${index+1}. ${item.title}
-                                </p>
-                            </header>
-                        </div>
-                        ```
-                    }
-                    );}
-            ).catch(function (error) {
-                console.log(error);
-                sleep(5000);
-                UpdateContent();
-            });
-            UpdateContent();
-        }
-    }
-
-    UpdateContent();
-
-    async function submitsearch() {
-        var search = document.getElementsByID("search_bar")[0].value;
-        document.getElementByID("search_bar")[0].value = '';
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/addsong/${query}/`).then((response) => {
-            return response.json();
-        }).then(
-            function (response) {
-                if (response.success == false) {
-                    return bulmaToast.toast({ message: 'Sorry, no results found.', type: 'is-danger' });
-                }
-                else {
-                    return bulmaToast.toast({ message: `Added ${response.type} to queue.`, type: 'is-success' });
-                }
-            }
-        ).catch(function (error) {
-            return bulmaToast.toast({ message: `Sorry, an error occurred: ${error} to queue.`, type: 'is-danger' });
-        }
-        );
-    }
-
-    async function play_pause() {
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/toggleplaypause/${document.user_info.id}/`).then(
-            function (response) {
-                if ('not_connected' in response.text) {
-                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' });
-                }
-                if ('was_paused' in response.text) {
-                    playpause = document.getElementById("playpause");
-                    element.setAttribute('data-feather', 'play');
-                }
-                else if ('was_not_playing' in response.text) {
-                    playpause = document.getElementById("playpause");
-                    element.setAttribute('data-feather', 'pause');
-                }
-            }
-        )
-    }
-    async function skip_forward() {
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/skip_forward/${document.user_info.id}/`).then(
-            function (response) {
-                if ('not_connected' in response.text) {
-                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' })
-                }
-            }
-        )
-    }
-    async function skip_back() {
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/skip_back/${document.user_info.id}/`).then(
-            function (response) {
-                if ('not_connected' in response.text) {
-                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' })
-                }
-                if (response.status == 200) {
-                    bulmaToast.toast({ message: 'Rewound 5 seconds.', type: 'is-danger' })
-                }
-            }
-        )
-    }
-    async function shuffle() {
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/shuffle/${document.user_info.id}/`).then(
-            function (response) {
-                if ('not_connected' in response.text) {
-                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' })
-                }
-            }
-        )
-    }
-    async function stop() {
-        await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/stop/${document.user_info.id}/`).then(
-            function (response) {
-                if ('not_connected' in response.text) {
-                    bulmaToast.toast({ message: 'Please join a voice channel.', type: 'is-danger' })
-                }
-            }
-        )
-    }
-    async function on_response() {
-        await sleep(2000);
-        console.log(this.xhttp);
-        if (this.xhttp.status != 200 && this.xhttp.status != 0) {
-            window.location.replace('/login');
-        }
-        console.log(this.xhttp.response);
-        document.user_info = xhttp.response
-        document.getElementById('Username').innerHTML = this.xhttp.response.username;
-        document.getElementById('UserImg').src = `https://cdn.discordapp.com/avatars/${this.xhttp.response.id}/${this.xhttp.response.avatar}?size=28`
-    }
-
+});
 </script>
-
-</html>
+</html> 
