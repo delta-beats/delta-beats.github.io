@@ -194,9 +194,9 @@
                     );}
             ).catch(async function (error) {
                 console.log(error);
-                UpdateContent();
+                setTimeout(repeatingFunc, 5000);
             });
-            UpdateContent();
+            setTimeout(repeatingFunc, 5000);
         }
     }
 
