@@ -167,7 +167,6 @@
     }
 
     async function UpdateContent() {
-        await sleep(2000);
         while (true) {
             await sleep(5000)
             await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/update/${document.user_info.id}/`).then((response) => {
@@ -194,13 +193,11 @@
                     );}
             ).catch(async function (error) {
                 console.log(error);
-                setTimeout(UpdateContent, 5000);
             });
-            setTimeout(UpdateContent, 5000);
         }
     }
 
-    setTimeout(UpdateContent, 5000);
+    UpdateContent();
 
     async function submitsearch() {
         var search = document.getElementsByID("search_bar")[0].value;
