@@ -200,7 +200,7 @@
     UpdateContent();
 
     async function submitsearch() {
-        var search = document.getElementById("search_bar")[0].value;
+        var query = document.getElementById("search_bar").value;
         document.getElementById("search_bar").value = '';
         await fetch(`https://httpsforwarder.ddb08.repl.co/p/api/addsong/${query}/`).then((response) => {
             return response.json();
