@@ -180,7 +180,7 @@
                     document.getElementById("songname").innerHTML = response.current_title;
                     document.getElementById("queue-items").innerHTML = '';
                     response.queue.forEach(function (item, index) {
-                        document.getElementById("queue-items").innerHTML += ```
+                        document.getElementById("queue-items").innerHTML += `
                         <div class="card dark">
                             <header class="card-header">
                                 <p class="card-header-title has-text-white">
@@ -188,7 +188,7 @@
                                 </p>
                             </header>
                         </div>
-                        ```
+                        `
                     }
                     );}
             ).catch(async function (error) {
