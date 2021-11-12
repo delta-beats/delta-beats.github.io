@@ -77,7 +77,7 @@
             <article class="tile is-child box black has-text-white">
                 <p class="title" style='color:white;'>Now Playing</p>
                 <p class="subtitle has-text-white" id="songname">Song Name</p>
-                <img src='https://i.imgur.com/0hZ5lnE.png' alt='Placeholder image for playing track' id='artwork' style="height: 500px;width: 500px;">
+                <img src='https://i.imgur.com/0hZ5lnE.png' alt='Placeholder image for playing track' id='artwork'>
                 <p class="subtitle" style='color:white;'></p>
             </article>
         </div>
@@ -179,6 +179,13 @@
                     document.getElementById("artwork").src = response.artwork;
                     document.getElementById("songname").innerHTML = response.current_title;
                     document.getElementById("queue-items").innerHTML = '';
+                    playpause = document.getElementById("playpause");
+                    if (response.paused == false) {
+                        playpause.setAttribute("data-feather", "pause");
+                    }
+                    else {
+                        playpause.setAttribute("data-feather", "play");
+                    }
                     response.queue.forEach(function (item, index) {
                         document.getElementById("queue-items").innerHTML += `
                         <div class="card dark">
@@ -227,11 +234,11 @@
                 }
                 if ('was_paused' in response.text) {
                     playpause = document.getElementById("playpause");
-                    element.setAttribute('data-feather', 'play');
+                    playpause.setAttribute('data-feather', 'play');
                 }
                 else if ('was_not_playing' in response.text) {
                     playpause = document.getElementById("playpause");
-                    element.setAttribute('data-feather', 'pause');
+                    playpause.setAttribute('data-feather', 'pause');
                 }
             }
         )
