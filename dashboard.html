@@ -181,10 +181,10 @@
                     document.getElementById("queue-items").innerHTML = '';
                     playpause = document.getElementById("playpause");
                     if (response.paused == false) {
-                        playpause.setAttribute("data-feather", "pause");
+                        playpause.innerHTML = feather.icons.pause.toString();
                     }
                     else {
-                        playpause.setAttribute("data-feather", "play");
+                        playpause.innerHTML = feather.icons.play.toString();
                     }
                     response.queue.forEach(function (item, index) {
                         document.getElementById("queue-items").innerHTML += `
@@ -234,11 +234,11 @@
                 }
                 if ('was_paused' in response.text) {
                     playpause = document.getElementById("playpause");
-                    playpause.setAttribute('data-feather', 'play');
+                    playpause.innerHTML = feather.icons.play.toString();
                 }
                 else if ('was_not_playing' in response.text) {
                     playpause = document.getElementById("playpause");
-                    playpause.setAttribute('data-feather', 'pause');
+                    playpause.innerHTML = feather.icons.pause.toString();
                 }
             }
         )
