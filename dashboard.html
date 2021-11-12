@@ -186,6 +186,8 @@
                     else {
                         playpause.innerHTML = feather.icons.play.toString();
                     }
+                    var progress = Math.ceil(response.completed / response.target * 100);
+                    document.getElementsByClassName("progress")[0].value = progress;
                     response.queue.forEach(function (item, index) {
                         document.getElementById("queue-items").innerHTML += `
                         <div class="card dark">
